@@ -1,0 +1,323 @@
+---
+title: "Graphing"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r}
+source("Simulation Study 1 Binomial.R")
+
+# FDP vs Correlation
+ggplot(sim_1_plotting, aes(x = corr)) +
+  geom_line(aes(y = fdr, color = Method), size = 1.5) + 
+  geom_hline(yintercept = 0.1, linetype = 2) + 
+  labs(y = 'FDP', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() + 
+  theme(legend.position = c(0.15,0.8), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Power vs Correlation
+ggplot(sim_1_plotting, aes(x = corr)) +
+  geom_line(aes(y = power, color = Method), size = 1.5) + 
+  labs(y = 'Power', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Nr Selected vs Correlation
+ggplot(sim_1_plotting, aes(x = corr)) +
+  geom_line(aes(y = nsel, color = Method), size = 1.5) + 
+  labs(y = 'Number of Selected Variables', x = expression(paste(rho))) +
+  theme_minimal() + 
+  theme(legend.position = c(0.85, 0.5), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Power Density
+ggplot(sim_1_power, aes(x = density)) + 
+  geom_density(aes(fill = rho), alpha = 0.5) + 
+  labs(y = 'Density', x = "Power", fill = expression(paste(rho))) + 
+  theme_minimal() +
+  theme(legend.position = c(0.15, 0.8), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+   scale_fill_brewer(palette = "Set2")
+
+# FDP Density
+ggplot(sim_1_fdp, aes(x = density)) + 
+  geom_density(aes(fill = rho), alpha = 0.5) + 
+  labs(y = 'Density', x = "FDP", fill = expression(paste(rho))) + 
+  theme_minimal() +
+  theme(legend.position = c(0.65, 0.8), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+   scale_fill_brewer(palette = "Set2")
+
+
+```
+
+
+```{r}
+source("Simulation Study 1 Poisson.R")
+
+# FDP vs Correlation
+ggplot(sim_1_pois_plotting, aes(x = corr)) +
+  geom_line(aes(y = fdr, color = Method), size = 1.5) + 
+  geom_hline(yintercept = 0.1, linetype = 2) + 
+  labs(y = 'FDP', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() + 
+  theme(legend.position = c(0.15,0.8), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Power vs correlation
+ggplot(sim_1_pois_plotting, aes(x = corr)) +
+  geom_line(aes(y = power, color = Method), size = 1.5) + 
+  labs(y = 'Power', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Nr Selected vs correlation
+ggplot(sim_1_pois_plotting, aes(x = corr)) +
+  geom_line(aes(y = nselrm, color = Method), size = 1.5) + 
+  labs(y = 'Number of Selected Variables', x = expression(paste(rho))) +
+  theme_minimal() + 
+  theme(legend.position = c(0.15, 0.5), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# FDP vs corr removed zero cases
+ggplot(nozero, aes(x = corr)) +
+  geom_line(aes(y = avfdp, color = Method), size = 1.5) + 
+  geom_hline(yintercept = 0.1, linetype = 2) + 
+  labs(y = 'FDP', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() + 
+  theme(legend.position = c(0.15,0.8), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_manual(values = c("#66C2A5","#FC8D62", "#E78AC3"))
+
+ggplot(nozero, aes(x = corr)) +
+  geom_line(aes(y = avpower, color = Method), size = 1.5) + 
+  labs(y = 'Power', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_manual(values = c("#66C2A5","#FC8D62", "#E78AC3"))
+
+```
+
+
+```{r}
+source("Simulation Study 1 Gaussian.R")
+
+# FDP vs correlation
+ggplot(sim_1_gaus_plotting, aes(x = corr)) +
+  geom_line(aes(y = fdr, color = Method), size = 1.5) + 
+  geom_hline(yintercept = 0.1, linetype = 2) + 
+  labs(y = 'FDP', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() + 
+  theme(legend.position = c(0.15,0.8), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Power vs correlation
+ggplot(sim_1_gaus_plotting, aes(x = corr)) +
+  geom_line(aes(y = power, color = Method), size = 1.5) + 
+  labs(y = 'Power', x = expression(paste(rho))) +
+  coord_cartesian(ylim = c(0, 1)) +
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+# Nr selected vs correlation
+ggplot(sim_1_gaus_plotting, aes(x = corr)) +
+  geom_line(aes(y = nsel, color = Method), size = 1.5) + 
+  labs(y = 'Number of Selected Variables', x = expression(paste(rho))) +
+  theme_minimal() + 
+  theme(legend.position = c(0.85, 0.6), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18))+ 
+  scale_color_brewer(palette = "Set2")
+
+
+```
+
+
+```{r}
+source("Simulation Study 2.R")
+
+# Plot of FDR by q
+ggplot(sim_plus, aes(x = amp)) +
+  geom_line(aes(y = fdr, color = q, linetype = Method), size = 1.2, alpha = 0.55) + 
+  geom_point(aes(y = fdr, color = q, shape = Method), size = 2.5) + 
+  labs(y = 'FDP', x = "Amplitude") +
+  theme_minimal() +
+  geom_hline(aes(yintercept = qline), linetype = 3)+
+  theme(legend.position = c(0.92, 0.15), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 10),
+        axis.text.y = element_text(size = 10),
+        axis.title.x = element_text(size = 15),
+        axis.title.y = element_text(size = 15),
+        strip.text = element_text(size = 15))+ 
+  coord_cartesian(xlim = c(1,50)) + 
+  scale_color_brewer(palette = "Set2", guide = "none") + 
+  facet_grid(cols = vars(q)) 
+
+# Plot of power by q
+ggplot(sim_plus, aes(x = amp)) +
+  geom_line(aes(y = power, color = q, linetype = Method), size = 1.2, alpha = 0.55) + 
+  geom_point(aes(y = power, color = q, shape = Method), size = 2.5) + 
+  labs(y = 'Power', x = "Amplitude") +
+  theme_minimal() +
+  theme(legend.position = c(0.92, 0.15), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 10),
+        axis.text.y = element_text(size = 10),
+        axis.title.x = element_text(size = 15),
+        axis.title.y = element_text(size = 15),
+        strip.text = element_text(size = 15))+ 
+  coord_cartesian(xlim = c(1,50)) + 
+  scale_color_brewer(palette = "Set2", guide = "none") + 
+  facet_grid(cols = vars(q)) 
+
+```
+
+```{r}
+source("Simulation Study 2 Nsel.R")
+ggplot(df, aes(x = amp)) +
+  geom_line(aes(y = nsel, color = q, linetype = Method), size = 1.2, alpha = 0.55) + 
+  geom_point(aes(y = nsel, color = q, shape = Method), size = 2.5) + 
+  labs(y = 'Number of Selected Variables', x = "Amplitude") +
+  theme_minimal() +
+  # geom_hline(aes(yintercept = qline), linetype = 3)+
+  theme(legend.position = c(0.92, 0.15), 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 10),
+        axis.text.y = element_text(size = 10),
+        axis.title.x = element_text(size = 15),
+        axis.title.y = element_text(size = 15),
+        strip.text = element_text(size = 15))+ 
+  coord_cartesian(xlim = c(1,50)) + 
+  scale_color_brewer(palette = "Set2", guide = "none") + 
+  facet_grid(cols = vars(q)) 
+
+```
+
+
+```{r}
+source("Simulation Study 3 Grid.R")
+ggplot(df, aes(x = p, y = n)) + 
+  geom_point(aes(size = avpower), color = "#66c2a5") + 
+  theme_minimal() +
+  labs(size = "Average Power", x = "Number of covariates (p)",
+       y = "Number of observations (n)") + 
+  theme(legend.position = "bottom", 
+        legend.background = element_blank(),
+        legend.box.background = element_rect(colour = "black"),
+        legend.title = element_text(face = "bold"),
+        axis.text.x = element_text(size = 18),
+        axis.text.y = element_text(size = 18),
+        axis.title.x = element_text(size = 18),
+        axis.title.y = element_text(size = 18),
+        strip.text = element_text(size = 18)) +
+  scale_size(range = c(0,10)) + 
+  coord_fixed()
+```
